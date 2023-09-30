@@ -12,6 +12,7 @@ Returns:
 If n is less than or equal to 0, an empty list will be returned.
 """
 
+
 def pascal_triangle(n):
     """
     Generate Pascal's triangle up to the nth row.
@@ -43,4 +44,3 @@ def pascal_triangle(n):
         result.append(current_row)
 
     return result
-
