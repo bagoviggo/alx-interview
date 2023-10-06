@@ -11,12 +11,14 @@ Requirements:
 - There can be keys that do not have boxes.
 """
 
+
 def canUnlockAll(boxes):
     """
     Determine if all boxes can be opened.
 
     Args:
-        boxes (list of list of int): A list of lists representing boxes and their keys.
+        boxes (list of list of int): A list of lists
+        representing boxes and their keys.
 
     Returns:
         bool: True if all boxes can be opened, else False.
@@ -48,4 +50,3 @@ if __name__ == "__main__":
 
     boxes3 = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
     print(canUnlockAll(boxes3))  # False
-
