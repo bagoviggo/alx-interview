@@ -1,4 +1,20 @@
+#!/usr/bin/python3
+"""
+Module to calculate the minimum number of operations to reach n characters.
+"""
+
 def minOperations(n):
+    """
+    Calculate the minimum number of operations to reach n characters.
+
+    Args:
+        n (int): The target number of characters.
+
+    Returns:
+        int: The minimum number of operations.
+
+    If n is impossible to achieve, return 0.
+    """
     if n <= 1:
         return 0
 
@@ -13,12 +29,4 @@ def minOperations(n):
             divisor += 1
 
     return operations
-
-# Testing the function
-if __name__ == "__main__":
-    n = 4
-    print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
-
-    n = 12
-    print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
 
