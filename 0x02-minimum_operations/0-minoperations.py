@@ -3,6 +3,7 @@
 Module to calculate the minimum number of operations to reach n characters.
 """
 
+
 def minOperations(n):
     """
     Calculate the minimum number of operations to reach n characters.
@@ -29,4 +30,3 @@ def minOperations(n):
             divisor += 1
 
     return operations
-
