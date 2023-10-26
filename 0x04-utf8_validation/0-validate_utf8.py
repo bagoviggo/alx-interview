@@ -2,11 +2,11 @@
 """
 Module: 0-validate_utf8
 
-This module defines the valid_utf8 function, which is used to determine if a given data set represents a valid UTF-8 encoding.
+This module defines the validUTF8 function, which is used to determine if a given data set represents a valid UTF-8 encoding.
 """
 
 
-def valid_utf8(data):
+def validUTF8(data):
     """
     Determine if a given data set represents a valid UTF-8 encoding.
 
@@ -16,52 +16,26 @@ def valid_utf8(data):
     Returns:
         bool: True if data is a valid UTF-8 encoding, else False.
     """
-    def is_start_byte(byte):
-        """
-        Check if a given byte is a valid UTF-8 start byte.
-
-        Args:
-            byte (int): The byte to be checked.
-
-        Returns:
-            bool: True if the byte is a valid start byte, else False.
-        """
-        return (byte & 0b10000000) == 0b00000000
-
-    def count_ones(byte):
-        """
-        Count the number of consecutive 1s in the leading bits of a byte.
-
-        Args:
-            byte (int): The byte to be checked.
-
-        Returns:
-            int: The count of consecutive 1s in the leading bits.
-        """
-        count = 0
-        while (byte & 0b10000000) == 0b10000000:
-            count += 1
-            byte <<= 1
-        return count
-
-    i = 0
-    while i < len(data):
-        byte = data[i]
-        if not is_start_byte(byte):
-            return False
-
-        num_bytes = count_ones(byte)
-        if num_bytes == 1 or num_bytes > 4:
-            return False
-
-        if i + num_bytes > len(data):
-            return False
-
-        for j in range(i + 1, i + num_bytes):
-            if not (data[j] & 0b11000000 == 0b10000000):
+    # Number of bytes expected to follow a start byte (0-4)
+    expected_bytes = 0
+    
+    for byte in data:
+        # Check if the current byte is a start byte
+        if expected_bytes == 0:
+            if (byte >> 5) == 0b110:
+                expected_bytes = 1
+            elif (byte >> 4) == 0b1110:
+                expected_bytes = 2
+            elif (byte >> 3) == 0b11110:
+                expected_bytes = 3
+            elif (byte >> 7) == 0b1:
                 return False
+        else:
+            # Check if the current byte is a continuation byte
+            if (byte >> 6) != 0b10:
+                return False
+            expected_bytes -= 1
 
-        i += num_bytes
-
-    return True
+    # Ensure all expected bytes have been found
+    return expected_bytes == 0
 
