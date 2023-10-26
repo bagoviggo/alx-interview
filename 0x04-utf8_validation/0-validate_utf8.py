@@ -1,4 +1,12 @@
-def validUTF8(data):
+#!/usr/bin/python3
+"""
+Module: 0-validate_utf8
+
+This module defines the valid_utf8 function, which is used to determine if a given data set represents a valid UTF-8 encoding.
+"""
+
+
+def valid_utf8(data):
     """
     Determine if a given data set represents a valid UTF-8 encoding.
 
