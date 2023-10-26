@@ -1,4 +1,4 @@
-def valid_utf8(data):
+def validUTF8(data):
     """
     Determine if a given data set represents a valid UTF-8 encoding.
 
