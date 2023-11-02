@@ -37,6 +37,7 @@ def is_safe(board, row, col, n):
 
     return True
 
+
 def solve_nqueens(n):
     """
     Find all solutions to the N-queens problem for a given board size.
@@ -67,18 +68,24 @@ def solve_nqueens(n):
     solve(board, 0)
     return solutions
 
+
 def print_solutions(solutions):
     """
     Print all the solutions found for the N-queens problem.
 
     Args:
-        solutions (list of lists): List of solutions, each represented as a list of queen positions.
+        solutions (list of lists): List of solutions,
+        each represented as a list of queen positions.
     """
     for solution in solutions:
-        for row in solution:
-            print([row.index(1), row.index(1) + 1], end=', ')
-        print()
+        print("[", end='')
+        for i in range(len(solution)):
+            if i > 0:
+                print(", ", end='')
+            print("[{}, {}]".format(solution[i].index(1), i + 1), end='')
+        print("]")
     print()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
