@@ -1,7 +1,28 @@
 #!/usr/bin/python3
 import sys
+"""
+N-Queens Solver
+
+
+This program solves the N-Queens problem,
+which is the challenge of placing N non-attacking queens
+on an N×N chessboard.
+"""
+
 
 def is_safe(board, row, col, n):
+    """
+    Check if it's safe to place a queen at a given position.
+
+    Args:
+        board (list of lists): The current state of the chessboard.
+        row (int): The row to check.
+        col (int): The column to check.
+        n (int): The size of the chessboard.
+
+    Returns:
+        bool: True if it's safe to place a queen, False otherwise.
+    """
     for i in range(col):
         if board[row][i] == 1:
             return False
@@ -17,6 +38,15 @@ def is_safe(board, row, col, n):
     return True
 
 def solve_nqueens(n):
+    """
+    Find all solutions to the N-queens problem for a given board size.
+
+    Args:
+        n (int): The size of the chessboard.
+
+    Returns:
+        list of lists: A list of solutions, each represented as a list of queen positions.
+    """
     if n < 4:
         print("N must be at least 4")
         sys.exit(1)
@@ -38,6 +68,12 @@ def solve_nqueens(n):
     return solutions
 
 def print_solutions(solutions):
+    """
+    Print all the solutions found for the N-queens problem.
+
+    Args:
+        solutions (list of lists): List of solutions, each represented as a list of queen positions.
+    """
     for solution in solutions:
         for row in solution:
             print([row.index(1), row.index(1) + 1], end=', ')
@@ -46,7 +82,7 @@ def print_solutions(solutions):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: nqueens N")
+        print("Usage: 0-nqueens.py N")
         sys.exit(1)
 
     try:
