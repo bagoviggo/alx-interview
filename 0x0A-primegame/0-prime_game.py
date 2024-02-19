@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" Module that generates an inifinte stream of prime numbers """
+
 
 def prime_generator():
     """
