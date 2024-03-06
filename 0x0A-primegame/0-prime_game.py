@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def check_prime(n):
     """
     Check if a given number n is prime.
