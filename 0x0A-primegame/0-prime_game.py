@@ -1,59 +1,67 @@
-#!/usr/bin/python3
-""" Module that generates an inifinte stream of prime numbers """
-
-
-def prime_generator():
+def check_prime(n):
     """
-    Generates an infinite stream of prime numbers using a generator.
+    Check if a given number n is prime.
 
-    Yields:
-        int: Prime numbers.
+    Args:
+        n (int): The number to check for primality.
+
+    Returns:
+        bool: True if n is prime, False otherwise.
     """
-    yield 2  # Start with the first prime number
-    primes = [2]  # Keep track of discovered prime numbers
-    num = 3  # Start checking from the next odd number
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
-    while True:
-        is_prime = all(num % p != 0 for p in primes)
-        if is_prime:
-            primes.append(num)
-            yield num
-        num += 2  # Move to the next odd number
+def add_prime(n, primes):
+    """
+    Add prime numbers up to n to the list of primes.
+
+    Args:
+        n (int): The maximum value up to which to find primes.
+        primes (list[int]): List of known prime numbers.
+
+    Returns:
+        None
+    """
+    last_prime = primes[-1]
+    if n > last_prime:
+        for i in range(last_prime + 1, n + 1):
+            if check_prime(i):
+                primes.append(i)
+            else:
+                primes.append(0)
 
 def isWinner(x, nums):
     """
-    Determines the winner of the Prime Game.
+    Determine the winner for each round of the game.
 
     Args:
         x (int): Number of rounds.
-        nums (List[int]): List of integers representing the set of numbers for each round.
+        nums (list[int]): Array of n for each round.
 
     Returns:
-        str or None: Name of the player who won the most rounds (either "Maria" or "Ben").
+        str or None: Name of the player that won the most rounds.
                      If the winner cannot be determined, returns None.
     """
-    prime_gen = prime_generator()
-    maria_wins = 0
+    score = {"Maria": 0, "Ben": 0}
+    primes = [0, 0, 2]  # Initialize with known primes (0 for non-primes)
+    add_prime(max(nums), primes)  # Precompute primes up to the maximum n
 
-    for _ in range(x):
-        maria_turn = True
-        for _ in range(nums[_]):
-            next_prime = next(prime_gen)
-            if next_prime > nums[_]:
-                break
-            maria_turn = not maria_turn
+    for round in range(x):
+        # Calculate the sum of primes less than or equal to nums[round]
+        prime_count = sum((i != 0 and i <= nums[round]) for i in primes[:nums[round] + 1])
+        if prime_count % 2:
+            winner = "Maria"
+        else:
+            winner = "Ben"
+        if winner:
+            score[winner] += 1
 
-        if maria_turn:
-            maria_wins += 1
-
-    if maria_wins > x // 2:
+    # Compare scores and determine the overall winner
+    if score["Maria"] > score["Ben"]:
         return "Maria"
-    elif maria_wins < x // 2:
+    elif score["Ben"] > score["Maria"]:
         return "Ben"
     else:
-        return None
-
-# Example usage
-if __name__ == "__main__":
-    print("Winner: {}".format(isWinner(3, [4, 5, 1])))
-
+        return None  # Cannot determine a winner
