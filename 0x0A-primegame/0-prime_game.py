@@ -3,6 +3,8 @@
 This module checks a number n is a prime number then
 returns the Name of the player that won most rounds
 """
+
+
 def check_prime(n):
     """
     Check if a given number n is prime.
@@ -17,6 +19,7 @@ def check_prime(n):
         if n % i == 0:
             return False
     return True
+
 
 def add_prime(n, primes):
     """
@@ -37,6 +40,7 @@ def add_prime(n, primes):
             else:
                 primes.append(0)
 
+
 def isWinner(x, nums):
     """
     Determine the winner for each round of the game.
@@ -54,8 +58,10 @@ def isWinner(x, nums):
     add_prime(max(nums), primes)  # Precompute primes up to the maximum n
 
     for round in range(x):
-        # Calculate the sum of primes less than or equal to nums[round]
-        prime_count = sum((i != 0 and i <= nums[round]) for i in primes[:nums[round] + 1])
+        # Calc sum of primes <  = nums[round]
+        prime_count = sum(
+            (i != 0 and i <= nums[round]) for i in primes[:nums[round] + 1]
+        )
         if prime_count % 2:
             winner = "Maria"
         else:
