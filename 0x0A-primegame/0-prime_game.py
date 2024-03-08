@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+This module checks a number n is a prime number then
+returns the Name of the player that won most rounds
+"""
 def check_prime(n):
     """
     Check if a given number n is prime.
