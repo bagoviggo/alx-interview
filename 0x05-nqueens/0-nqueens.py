@@ -46,7 +46,8 @@ def solve_nqueens(n):
         n (int): The size of the chessboard.
 
     Returns:
-        list of lists: A list of solutions, each represented as a list of queen positions.
+        list of lists: A list of solutions,
+        each represented as a list of queen positions.
     """
     if n < 4:
         print("N must be at least 4")
@@ -89,7 +90,7 @@ def print_solutions(solutions):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: 0-nqueens.py N")
+        print("Usage: nqueens N")
         sys.exit(1)
 
     try:
